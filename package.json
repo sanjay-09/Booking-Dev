@@ -1,0 +1,27 @@
+{
+  "name": "booking-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.21.1",
+    "@sequelize/mssql": "^7.0.0-alpha.43",
+    "async-mutex": "^0.5.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
+    "mssql": "^11.0.1",
+    "nodemon": "^3.1.7",
+    "sequelize": "^6.37.5",
+    "sequelize-cli": "^6.6.2",
+    "tedious": "^18.6.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.21.1"
+  }
+}
