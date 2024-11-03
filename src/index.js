@@ -12,6 +12,11 @@ const start=()=>{
     app.use(bodyParser.json())
 
 
+    app.get("/",(req,res)=>{
+        return res.status(200).send("okk");
+    })
+
+
    app.get("/seatsData",seatData);
    app.get("/user/:userEmail",userFetch);
 
