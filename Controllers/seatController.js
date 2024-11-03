@@ -58,6 +58,75 @@ const handleSeat=async(req,res)=>{
 }
 
 
+const handleSeat2=async(req,res)=>{
+
+    try{
+       
+        const seatId=parseInt(req.params.seatId,10);
+        const userId=parseInt(req.params.userId,10);
+        await prismaClient.$transaction(async(prisma)=>{
+
+            const seat=await prisma.seat.findUnique({
+                where:{
+                    id:seatId
+                }
+
+            })
+           
+            if(seat.isBooked){
+                console.log("---why----");
+               throw new Error("seat already booked")
+            }
+            console.log("seatVersion--->",seat);
+           const bookedSeat= await prisma.seat.updateMany({
+                where:{
+                    id:seatId,
+                    version:seat.version
+                },
+                data:{
+                    isBooked:true,
+                    status:'Booked',
+                    version:seat.version+1
+
+                }
+                
+            })
+
+            console.log("booked seat---->",bookedSeat);
+            if(bookedSeat.count===0){
+                throw new Error('seat already booked 2');
+            }
+
+            await prisma.userSeat.create({
+                data:{
+                    custId:userId,
+                    seatId:seatId
+                }
+            })
+
+        
+            return res.status(200).json({
+                message:"Booked the seat"
+            })
+
+
+
+        })
+
+    }
+    catch(err){
+
+        return res.status(500).json(
+           {
+             message:err.message || 'error while booking the seat'
+           }
+
+        )
+
+    }
+
+}
+
 const seatData=async(req,res)=>{
     try{
 
@@ -77,5 +146,6 @@ const seatData=async(req,res)=>{
 }
 module.exports={
     handleSeat,
-    seatData
+    seatData,
+    handleSeat2
 }

@@ -1,5 +1,5 @@
 const express=require("express");
-const { handleSeat, seatData } = require("../Controllers/seatController");
+const { handleSeat, seatData, handleSeat2 } = require("../Controllers/seatController");
 const { userFetch, userCreate } = require("../Controllers/UserController");
 const app=express()
 const cors=require("cors")
@@ -17,7 +17,7 @@ const start=()=>{
 
    app.post("/users",userCreate);
 
-    app.post("/seat/:seatId/user/:userId",handleSeat);
+    app.post("/seat/:seatId/user/:userId",handleSeat2);
     app.listen(3001,()=>{
         console.log("listening on the port 3001");
     })

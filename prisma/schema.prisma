@@ -28,6 +28,8 @@ model Seat{
    status String
    class String
   userSeat UserSeat[]
+
+  version Int @default(1)
  
 }
 model UserSeat{

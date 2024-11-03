@@ -35,6 +35,11 @@ const userFetch=async(req,res)=>{
                 email
             }
         });
+        if(!users){
+            return res.status(200).json({
+                message:"User is null"
+            })
+        }
       
         return res.status(200).json({
             id:users.id,
